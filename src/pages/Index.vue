@@ -7,7 +7,6 @@ export default {
     data() {
         return {
             slides: [
-                
                 {
                     title: 'How to replace the \n**front brake pads**' ,
                     subtitle:'Perform the replacement of brake pads in complete set for each axis. This provides effective braking. Do not wash the brake elements with gasoline, diesel fuel or gasoline-based solvents. Observe the safety procedures! when brake pads work, brake dust is formed. Therefore, do not use compressed air and do not...',
