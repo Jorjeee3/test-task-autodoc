@@ -1,10 +1,12 @@
 <template>
     <div class="slider">
-
+        <Slide />
     </div>
 </template>
 
 <script>
+import Slide from '@/components/Slider/Slide.vue';
+
 export default {
     name: "slider",
     data() {
@@ -34,7 +36,7 @@ export default {
         }
     },
     components: {
-
+        Slide
     },
     computed: {
         slide () {
