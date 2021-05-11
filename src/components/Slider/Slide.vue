@@ -40,13 +40,13 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 70vw 0 50vw 0px rgba(255, 255, 255, 0.7) inset;
+    padding: 100px 0 0 140px;
 }
 
 .slide-title {
     margin: 0;
     font-size: 70px;
     margin-bottom: 50px;
-
 }
 
 .slide-title ::v-deep b {
@@ -62,11 +62,11 @@ export default {
 }
 
 .front-brake-link {
-    display: inline-block;
-    vertical-align: middle;
     text-decoration: none;
     color: rgb(201, 5, 5);
     padding-bottom: 5px;
     border-bottom: 2px solid rgb(201, 5, 5);
+    display: inline-block;
 }
+
 </style>

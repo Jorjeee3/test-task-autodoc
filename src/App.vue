@@ -1,22 +1,22 @@
 <template>
   <div id="app">
+    <Index />
   </div>
 </template>
 
 <script>
-
+import Index from "./pages/Index.vue";
 
 export default {
-  name: 'App',
+  name: "app",
   components: {
-  
+    Index
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-}
+@import './styles/normalize.css';
+@import './styles/typography.css';
+
 </style>
