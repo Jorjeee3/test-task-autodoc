@@ -1,11 +1,15 @@
 <template>
     <div class="slider">
-        <Slide />
+        <transition name="fade" tag="div">
+            <Slide :key="slide.title" :slide="slide" />
+        </transition>
+        <SlideTab :tabs="slides" :currentSlideIndex="currentSlideIndex"/>
     </div>
 </template>
 
 <script>
 import Slide from '@/components/Slider/Slide.vue';
+import SlideTab from '@/components/Slider/SlideTab.vue'; 
 
 export default {
     name: "slider",
@@ -14,6 +18,12 @@ export default {
             timer: null,
             currentSlideIndex: 0
         };
+    },
+    props: {
+        slides: {
+            type: Array,
+            required: true
+        },
     },
     mounted () {
         this.startSlider ();
@@ -28,7 +38,7 @@ export default {
             if (this.currentSlideIndex === this.slides.length - 1) {
                 this.currentSlideIndex = 0
             } else {
-                this.currentSlideIndex += 1
+                // this.currentSlideIndex += 1
             }
         },
         prev () {
@@ -36,7 +46,8 @@ export default {
         }
     },
     components: {
-        Slide
+        Slide,
+        SlideTab
     },
     computed: {
         slide () {

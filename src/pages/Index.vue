@@ -1,8 +1,10 @@
 <template>
-    <div></div>
+    <Slider :slides="slides" />
 </template>
 
 <script>
+import Slider from '@/components/Slider/Slider.vue'; 
+
 export default {
     data() {
         return {
@@ -49,6 +51,13 @@ export default {
                 },
             ]
         }
+    },
+    components: {
+        Slider,
     }
 }
 </script>
+
+<style scoped>
+
+</style>
