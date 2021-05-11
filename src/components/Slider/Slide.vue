@@ -1,6 +1,8 @@
 <template>
     <article class="slide" :style="{backgroundImage: `url(${slide.image})`}">
-        
+        <h1 class="slide-title" v-html="parseMarkdown(slide.title)" />
+        <span class="slide-subtitle">{{slide.subtitle}}</span>
+        <a class="front-brake-link" :href="slide.link.src">{{slide.link.title}}</a>
     </article>
 </template>
 
@@ -32,5 +34,39 @@ export default {
 </script>
 
 <style scoped>
+.slide {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 70vw 0 50vw 0px rgba(255, 255, 255, 0.7) inset;
+}
 
+.slide-title {
+    margin: 0;
+    font-size: 70px;
+    margin-bottom: 50px;
+
+}
+
+.slide-title ::v-deep b {
+    color: red;
+    font-weight: inherit;
+}
+
+.slide-subtitle {
+    display: block;
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.front-brake-link {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    color: rgb(201, 5, 5);
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgb(201, 5, 5);
+}
 </style>
