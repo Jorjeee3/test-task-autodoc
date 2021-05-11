@@ -17,10 +17,6 @@ export default {
 
 <style>
 @import './styles/normalize.css';
-
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-}
+@import './styles/typography.css';
 
 </style>

@@ -1,22 +1,28 @@
 <template>
     <div class="slider">
-        <transition name="fade" tag="div">
+        <transition name="fade" mode="out-in" tag="div">
             <Slide :key="slide.title" :slide="slide" />
         </transition>
-        <SlideTab :tabs="slides" :currentSlideIndex="currentSlideIndex"/>
+        <SlideNav
+            :tabs="slides"
+            :currentSlideIndex="currentSlideIndex"
+            @set-active-tab="setActiveTab" 
+            :animationDuration="animationDuration"
+        />
     </div>
 </template>
 
 <script>
 import Slide from '@/components/Slider/Slide.vue';
-import SlideTab from '@/components/Slider/SlideTab.vue'; 
+import SlideNav from '@/components/Slider/SlideNav.vue'; 
 
 export default {
-    name: "slider",
+    name: "Slider",
     data() {
         return {
             timer: null,
-            currentSlideIndex: 0
+            currentSlideIndex: 0,
+            animationDuration: 5000,
         };
     },
     props: {
@@ -26,12 +32,12 @@ export default {
         },
     },
     mounted () {
-        this.startSlider ();
+        this.startSlider();
     },
 
     methods: {
         startSlider () {
-            this.timer = setInterval(this.next, 2500);
+            this.timer = setInterval(this.next, this.animationDuration);
         },
 
         next () {
@@ -43,11 +49,17 @@ export default {
         },
         prev () {
             this.currentSlideIndex -= 1;
+        },
+        setActiveTab (tabIndex) {
+            this.currentSlideIndex = tabIndex;
+            clearInterval(this.timer)
+            this.startSlider();
         }
+
     },
     components: {
         Slide,
-        SlideTab
+        SlideNav
     },
     computed: {
         slide () {
@@ -58,5 +70,10 @@ export default {
 </script>
 
 <style scoped>
-
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
 </style>
