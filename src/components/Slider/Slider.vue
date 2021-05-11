@@ -70,6 +70,10 @@ export default {
 </script>
 
 <style scoped>
+.slider {
+    position: relative;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }
