@@ -44,7 +44,7 @@ export default {
             if (this.currentSlideIndex === this.slides.length - 1) {
                 this.currentSlideIndex = 0
             } else {
-                // this.currentSlideIndex += 1
+                this.currentSlideIndex += 1
             }
         },
         prev () {
@@ -77,7 +77,7 @@ export default {
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 </style>
