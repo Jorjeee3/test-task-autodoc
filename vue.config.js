@@ -1,4 +1,5 @@
-module.export = {
-   publicPath: '/test-task-autodoc/'
-}  
-
+module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/test-task-autodoc/'
+    : '/'
+}
