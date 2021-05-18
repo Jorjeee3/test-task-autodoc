@@ -3,14 +3,17 @@
         :class="{ active: isActive }"
         class="tab-button"
         @click="setActiveTab"
+        @mouseover="stopSlider"
+        @mouseleave="startSlider"
     >
         <ProgressBar
             :animationDuration="animationDuration"
-            v-if="isActive"
+            v-if="isActive && autoStart"
             class="progress-bar"
+            :start="!sliderStopped"
         />
         <h3 class="tab-title">
-            <small class="tab-number">0{{tabIndex + 1}}</small>
+            <small class="tab-number" v-if="twoDigits">{{twoDigits}}</small>
             {{tab.tabTitle}}
         </h3>
     </button>
@@ -30,22 +33,47 @@ export default {
             type: Boolean,
             required: true,
         },
-        tab:{
+        tab: {
             type: Object,
             required: true,
         },
         animationDuration: {
 			type: Number,
 			default: 0
-		}
-    },
-    
-    methods: {
-        setActiveTab() {
-            this.$emit("set-active-tab", this.tabIndex)
+		},
+        sliderStopped: {
+			type: Boolean,
+			required: true, 
+		},
+        autoStart: {
+            type: Boolean,
+			required: true,
         }
     },
 
+    methods: {
+        setActiveTab() {
+            this.$emit("set-active-tab", this.tabIndex)
+        },
+        startSlider() {
+            this.$emit("start-slider")
+        },
+        stopSlider () {
+            this.$emit("stop-slider")
+        }
+    },
+    computed: {
+
+        twoDigits() {
+            let { tabIndex } = this 
+            tabIndex++;
+
+            if (tabIndex < 10) {
+                return '0' + tabIndex
+            } 
+            return tabIndex
+        }
+    },
     components: {
         ProgressBar
     }
@@ -53,19 +81,10 @@ export default {
 </script>
 
 <style scoped>
-.slider-navigation {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
 .tab-button {
     flex-grow: 1;
     flex-basis: 0;
+    flex: 1;
     padding-bottom: 20px;
     background-color: #F8F8F8;
     border: 0;

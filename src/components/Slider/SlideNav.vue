@@ -1,13 +1,18 @@
 <template>
     <nav class="slider-navigation">
-        <SlideTab v-for="(tab, tabIndex) in tabs"
+        <SlideTab 
+            v-for="(tab, tabIndex) in tabs"
             :key="tab.tabTitle"
-            @set-active-tab="setActiveTab"
             :tabIndex="tabIndex" 
             :currentSlideIndex="currentSlideIndex"
             :tab="tab"
+            :autoStart="autoStart"
+            :sliderStopped="sliderStopped"
             :isActive="isActive(tabIndex)"
             :animationDuration="animationDuration"
+            @start-slider="startSlider"
+            @set-active-tab="setActiveTab"
+            @stop-slider="stopSlider"
         />  
     </nav>
 </template>
@@ -29,7 +34,15 @@ export default {
         animationDuration: {
 			type: Number,
 			default: 0
-		}
+		},
+        sliderStopped: {
+			type: Boolean,
+			required: true, 
+		},
+        autoStart: {
+            type: Boolean,
+			required: true,
+        }
     },
     
     methods: {
@@ -41,6 +54,12 @@ export default {
         },
         setActiveTab (tabIndex) {
             this.$emit("set-active-tab", tabIndex)
+        },
+        startSlider() {
+            this.$emit("start-slider")
+        },
+        stopSlider () {
+            this.$emit("stop-slider")
         }
 
     },
@@ -56,6 +75,8 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    overflow-x: auto;
+    white-space: nowrap;
     position: absolute;
     left: 0;
     bottom: 0;
