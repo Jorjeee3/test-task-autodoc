@@ -68,9 +68,11 @@ export default {
                 this.currentSlideIndex += 1
             }
         },
+
         prev () {
             this.currentSlideIndex -= 1;
         },
+        
         setActiveTab (tabIndex) {
             this.currentSlideIndex = tabIndex;
             clearInterval(this.timer)
