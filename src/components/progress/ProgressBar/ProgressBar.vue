@@ -1,53 +1,37 @@
 <template>
-	<div class="progress-bar">
+	<div class="progress-bar" :class="{stopped: !start}">
 		<transition name="progress" appear>
 			<span
-				class="progress-line"
-				:style="{transitionDuration: animationDuration + 'ms' }"
+				:key="start"
+				class="progress-line" 
+				:style="{
+					transitionDuration: animationDuration + 'ms',
+				}"
 			/>
 		</transition>
 	</div>
 </template>
 
 <script>
-import percentage from '@/utils/percentage';
-
 export default {
+	name:"ProgressBar",
 	props: {
 		animationDuration: {
 			type: Number,
 			default: 0
-		}
-	},
-
-	computed: {
-		progressBarColor () {
-			let progressBarColor;
-			const BAR_FULL_WIDTH = 100;
-
-			if (this.progressBarWidth === null) {
-				progressBarColor = 'var(--primary-yellow)';
-			}
-			else if (this.progressBarWidth < BAR_FULL_WIDTH) {
-				progressBarColor = 'currentColor';
-			}
-			else {
-				progressBarColor = '#d1f749';
-			}
-			return progressBarColor;
 		},
-
-		progressBarWidth () {
-			return percentage(this.value, this.length);
-		}
+        start: {
+			type: Boolean,
+			default: true
+		},
 	}
-};
+}
 </script>
 
 <style scoped>
 .progress-bar {
 	height: var(--progress-bar-height, 0.188em);
-	background-color: var(--progress-bar-background-color, #404040);
+	background-color: var(--progress-bar-background-color, #eee);
 	color: #fff;
 	width: 100%;
 	border-radius: 1em;
@@ -55,18 +39,24 @@ export default {
 	overflow: hidden;
 }
 
-.progress-enter-active, .progress-leave-active {
-  width: 100%;
-}
-.progress-enter, .progress-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-  width: 0;
-}
-
 .progress-bar .progress-line {
 	height: inherit;
 	border-radius: inherit;
 	display: block;
-	background-color: #fff;
 	transition-timing-function: linear;
 }
+
+.progress-bar.stopped .progress-line {
+	width: 0;
+	transition: none;
+}
+
+.progress-enter-active, .progress-leave-active {
+  width: 100%;
+  background: #fff;
+}
+.progress-enter, .progress-leave-to {
+  width: 0;
+}
+
 </style>

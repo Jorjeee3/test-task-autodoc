@@ -1,8 +1,18 @@
 <template>
     <article class="slide" :style="{backgroundImage: `url(${slide.image})`}">
-        <h1 class="slide-title" v-html="parseMarkdown(slide.title)" />
-        <span class="slide-subtitle">{{slide.subtitle}}</span>
-        <a class="front-brake-link" :href="slide.link.src">{{slide.link.title}}</a>
+       <div class="slide-content">
+            <h1 class="slide-title" v-html="parseMarkdown(slide.title)" />
+            <span class="slide-subtitle">{{slide.subtitle}}</span>
+            <a class="front-brake-link" :href="slide.link.src">
+                {{slide.link.title}}
+            </a>
+            <a 
+            :href="slide.link.src" 
+            >
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            
+       </div>
     </article>
 </template>
 
@@ -28,7 +38,7 @@ export default {
                 .replace(/\n$/gim, '<br />')
 
             return htmlText.trim()
-        }
+        },
     }
 }
 </script>
@@ -43,10 +53,20 @@ export default {
     padding: 100px 0 0 140px;
 }
 
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-0%, -50%);
+    width: 100%;
+    padding: 0 4vw;
+}
+
 .slide-title {
     margin: 0;
-    font-size: 70px;
-    margin-bottom: 50px;
+    font-size: 4em;
+    margin-bottom: 0.75em;
+    font-weight: 500;
 }
 
 .slide-title ::v-deep b {
@@ -55,10 +75,17 @@ export default {
 }
 
 .slide-subtitle {
-    display: block;
+    max-width: 1000px;
+    height: 72px;
     font-size: 20px;
     color: #000;
     margin-bottom: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .front-brake-link {
@@ -67,6 +94,17 @@ export default {
     padding-bottom: 5px;
     border-bottom: 2px solid rgb(201, 5, 5);
     display: inline-block;
+}
+
+.fa-arrow-right {
+    color: rgb(201, 5, 5);
+    transform: translate(70%, 0%);
+}
+
+@media screen and (max-width: 770px) {
+    .slide-title {
+        font-size: 3em;
+    }
 }
 
 </style>
