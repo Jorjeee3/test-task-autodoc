@@ -3,7 +3,15 @@
        <div class="slide-content">
             <h1 class="slide-title" v-html="parseMarkdown(slide.title)" />
             <span class="slide-subtitle">{{slide.subtitle}}</span>
-            <a class="front-brake-link" :href="slide.link.src">{{slide.link.title}}</a>
+            <a class="front-brake-link" :href="slide.link.src">
+                {{slide.link.title}}
+            </a>
+            <a 
+            :href="slide.link.src" 
+            >
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            
        </div>
     </article>
 </template>
@@ -30,7 +38,7 @@ export default {
                 .replace(/\n$/gim, '<br />')
 
             return htmlText.trim()
-        }
+        },
     }
 }
 </script>
@@ -86,6 +94,11 @@ export default {
     padding-bottom: 5px;
     border-bottom: 2px solid rgb(201, 5, 5);
     display: inline-block;
+}
+
+.fa-arrow-right {
+    color: rgb(201, 5, 5);
+    transform: translate(70%, 0%);
 }
 
 @media screen and (max-width: 770px) {
