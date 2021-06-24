@@ -65,7 +65,7 @@ export default {
             if (this.currentSlideIndex === this.slides.length - 1) {
                 this.currentSlideIndex = 0
             } else {
-                // this.currentSlideIndex += 1
+                this.currentSlideIndex += 1
             }
         },
 
@@ -80,10 +80,12 @@ export default {
         },
 
     },
+    
     components: {
         Slide,
         SlideNav
     },
+
     computed: {
         slide () {
             return this.slides[this.currentSlideIndex];
