@@ -11,7 +11,6 @@
             >
                 <i class="fas fa-arrow-right"></i>
             </a>
-            
        </div>
     </article>
 </template>
